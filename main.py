@@ -484,6 +484,7 @@ def main(page: ft.Page):
         page.add(ft.Container(content=coluna, padding=15, expand=True))
         page.update()
 
+    # ==================== MOSTRAR VERSÍCULOS (CORRIGIDO) ====================
     def mostrar_versiculos(livro, capitulo):
         tamanho = obter_tamanho_fonte()
         page.controls.clear()
@@ -496,7 +497,11 @@ def main(page: ft.Page):
             ref = f"{livro['nome']} {capitulo['numero']}:{v['numero']}"
             favorito = eh_favorito(ref)
             
-            nota = page.client_storage.get(f"nota_{ref}") or ""
+            # 🔥 CORREÇÃO 1: proteção contra client_storage
+            try:
+                nota = page.client_storage.get(f"nota_{ref}") or ""
+            except AttributeError:
+                nota = ""
             tem_nota = nota != ""
             
             def abrir_anotacao(e, r=ref):
@@ -509,7 +514,11 @@ def main(page: ft.Page):
                     width=350,
                 )
                 def salvar_anotacao(e):
-                    page.client_storage.set(f"nota_{r}", campo.value)
+                    # 🔥 CORREÇÃO 2: proteção contra client_storage
+                    try:
+                        page.client_storage.set(f"nota_{r}", campo.value)
+                    except AttributeError:
+                        pass
                     if page.dialog:
                         page.dialog.open = False
                     page.update()
@@ -976,7 +985,6 @@ def main(page: ft.Page):
         page.add(ft.Container(content=coluna, padding=15, expand=True))
         page.update()
 
-    # ===== ORAÇÃO SEM ÁUDIO (CORRIGIDO) =====
     def mostrar_oracao_texto(oracao, categoria):
         tamanho = obter_tamanho_fonte()
         page.controls.clear()
