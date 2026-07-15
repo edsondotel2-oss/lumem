@@ -1,0 +1,88 @@
+{
+  "Manhã": [
+    {
+      "titulo": "Oração da Manhã",
+      "texto": "Senhor, agradeço por mais este dia que começa. Que a Tua luz guie meus passos e que eu possa ser instrumento do Teu amor. Amém."
+    },
+    {
+      "titulo": "Oferecimento do Dia",
+      "texto": "Ofereço este dia a Deus, com todas as minhas ações, pensamentos e palavras. Que tudo seja para Sua glória. Amém."
+    },
+    {
+      "titulo": "Oração ao Espírito Santo",
+      "texto": "Vinde, Espírito Santo, enchei os corações dos vossos fiéis e acendei neles o fogo do vosso amor. Enviai o vosso Espírito e tudo será criado, e renovareis a face da terra. Amém."
+    }
+  ],
+  "Noite": [
+    {
+      "titulo": "Oração da Noite",
+      "texto": "Senhor, agradeço pelo dia que passou. Perdoa minhas falhas e concede um sono tranquilo. Amém."
+    },
+    {
+      "titulo": "Exame de Consciência",
+      "texto": "Senhor, examino meu coração: onde pequei, perdoa-me; onde acertei, agradeço. Concede-me a graça de recomeçar amanhã. Amém."
+    },
+    {
+      "titulo": "Oração de Proteção",
+      "texto": "Anjo da guarda, meu fiel amigo, protege-me durante esta noite. Que nenhum mal me alcance e que eu descansem em paz. Amém."
+    }
+  ],
+  "Família": [
+    {
+      "titulo": "Oração pela Família",
+      "texto": "Deus, abençoa minha família. Que haja união, amor e respeito entre todos. Amém."
+    },
+    {
+      "titulo": "Oração pelos Filhos",
+      "texto": "Senhor, protege meus filhos. Dá-lhes sabedoria, saúde e um coração cheio de amor. Amém."
+    },
+    {
+      "titulo": "Oração pelos Pais",
+      "texto": "Deus, abençoa meus pais. Dá-lhes saúde, paz e alegria. Que eu possa sempre honrá-los. Amém."
+    }
+  ],
+  "Saúde": [
+    {
+      "titulo": "Oração pela Saúde",
+      "texto": "Senhor, cura os enfermos e fortalece os que sofrem. Dá saúde ao meu corpo e à minha alma. Amém."
+    },
+    {
+      "titulo": "Oração para os Doentes",
+      "texto": "Jesus, médico das almas e dos corpos, estende tua mão sobre todos os que estão enfermos. Conforta-os e dá-lhes a cura. Amém."
+    }
+  ],
+  "Momentos Difíceis": [
+    {
+      "titulo": "Oração na Aflição",
+      "texto": "Senhor, estou passando por um momento difícil. Dá-me força e esperança para superar esta provação. Amém."
+    },
+    {
+      "titulo": "Oração de Confiança",
+      "texto": "Confio em Ti, Senhor, mesmo quando não entendo os caminhos. Tua graça me basta. Amém."
+    },
+    {
+      "titulo": "Oração Contra a Ansiedade",
+      "texto": "Senhor, entrego a Ti minhas ansiedades. Dá-me paz e serenidade. Que eu confie em Teu cuidado. Amém."
+    }
+  ],
+  "Eucaristia": [
+    {
+      "titulo": "Ação de Graças após a Comunhão",
+      "texto": "Senhor Jesus, obrigado por Te fazeres presente na Eucaristia. Ajuda-me a viver em comunhão contigo. Amém."
+    },
+    {
+      "titulo": "Oração de Adoração",
+      "texto": "Adoro-Te, ó Cristo, presente no Santíssimo Sacramento. Que meu coração sempre Te adore. Amém."
+    }
+  ],
+  "Perdão": [
+    {
+      "titulo": "Oração de Arrependimento",
+      "texto": "Senhor, perdoa-me por todas as vezes que pequei. Purifica meu coração e renova meu espírito. Amém."
+    },
+    {
+      "titulo": "Oração para Perdoar",
+      "texto": "Senhor, ajuda-me a perdoar aqueles que me ofenderam, assim como Tu me perdoas. Amém."
+    }
+  ]
+}
