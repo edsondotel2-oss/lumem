@@ -6,7 +6,6 @@ import random
 
 # ---------- Carregar dados ----------
 def carregar_biblia():
-    # 🔥 MUDANÇA: busca o arquivo NA RAIZ (não mais em data/)
     caminho = "biblia.json"
     try:
         with open(caminho, "r", encoding="utf-8-sig") as f:
@@ -259,12 +258,11 @@ def main(page: ft.Page):
 
         grid = ft.GridView(
             controls=[
-                # 🔥 MUDANÇA: caminhos das imagens APENAS com o nome do arquivo (raiz)
-                _criar_card("Bíblia", "Leia e estude", "/biblia", ft.Colors.INDIGO_100, "biblia.jpg"),
+                _criar_card("Bíblia", "Leia e estude", "/biblia", ft.Colors.INDIGO_100, "/assets/biblia.jpg"),
                 _criar_card("Favoritos", "Versículos salvos", "/favoritos", ft.Colors.AMBER_100, None),
-                _criar_card("Liturgia", "Liturgia Diária", "/liturgia", ft.Colors.GREEN_100, "pomba.png"),
-                _criar_card("Terço", "Reze o Santo Terço", "/terco", ft.Colors.PURPLE_100, "rosario.png"),
-                _criar_card("Orações", "Para todos os momentos", "/oracoes", ft.Colors.BLUE_100, "oracao.png"),
+                _criar_card("Liturgia", "Liturgia Diária", "/liturgia", ft.Colors.GREEN_100, "/assets/pomba.png"),
+                _criar_card("Terço", "Reze o Santo Terço", "/terco", ft.Colors.PURPLE_100, "/assets/rosario.png"),
+                _criar_card("Orações", "Para todos os momentos", "/oracoes", ft.Colors.BLUE_100, "/assets/oracao.png"),
                 _criar_card("Config.", "Ajustes do app", "/configuracoes", ft.Colors.GREY_200, None),
             ],
             runs_count=3,
@@ -315,7 +313,6 @@ def main(page: ft.Page):
 
     def _criar_card(titulo, subtitulo, rota, cor_fundo, caminho_imagem=None):
         if caminho_imagem:
-            # 🔥 AGORA busca a imagem na RAIZ (porque o caminho é só o nome)
             icon = ft.Image(
                 src=caminho_imagem,
                 width=80,
@@ -531,6 +528,7 @@ def main(page: ft.Page):
                         ft.TextButton("Salvar", on_click=salvar_anotacao),
                     ],
                 )
+                # 🔥 Correção: usar page.open para abrir o diálogo
                 page.dialog = dialog
                 dialog.open = True
                 page.update()
@@ -603,7 +601,7 @@ def main(page: ft.Page):
                         versiculo = next((v for v in capitulo["versiculos"] if v["numero"] == ver_num), None)
                         if versiculo:
                             btn = ft.Container(
-                                content=ft.Text(f"{ref} – {versiculo['texto'][:60]}...", size=13),
+                                content=ft.Text(f"{ref} – {versiculo['texto'][:80]}...", size=13),
                                 padding=12,
                                 bgcolor=ft.Colors.AMBER_50,
                                 border_radius=8,
