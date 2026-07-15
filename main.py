@@ -6,7 +6,8 @@ import random
 
 # ---------- Carregar dados ----------
 def carregar_biblia():
-    caminho = os.path.join("data", "biblia.json")
+    # 🔥 MUDANÇA: busca o arquivo NA RAIZ (não mais em data/)
+    caminho = "biblia.json"
     try:
         with open(caminho, "r", encoding="utf-8-sig") as f:
             dados = json.load(f)
@@ -258,11 +259,12 @@ def main(page: ft.Page):
 
         grid = ft.GridView(
             controls=[
-                _criar_card("Bíblia", "Leia e estude", "/biblia", ft.Colors.INDIGO_100, "app/assets/images/biblia.jpg"),
+                # 🔥 MUDANÇA: caminhos das imagens APENAS com o nome do arquivo (raiz)
+                _criar_card("Bíblia", "Leia e estude", "/biblia", ft.Colors.INDIGO_100, "biblia.jpg"),
                 _criar_card("Favoritos", "Versículos salvos", "/favoritos", ft.Colors.AMBER_100, None),
-                _criar_card("Liturgia", "Liturgia Diária", "/liturgia", ft.Colors.GREEN_100, "app/assets/images/pomba.png"),
-                _criar_card("Terço", "Reze o Santo Terço", "/terco", ft.Colors.PURPLE_100, "app/assets/images/rosario.png"),
-                _criar_card("Orações", "Para todos os momentos", "/oracoes", ft.Colors.BLUE_100, "app/assets/images/oracao.png"),
+                _criar_card("Liturgia", "Liturgia Diária", "/liturgia", ft.Colors.GREEN_100, "pomba.png"),
+                _criar_card("Terço", "Reze o Santo Terço", "/terco", ft.Colors.PURPLE_100, "rosario.png"),
+                _criar_card("Orações", "Para todos os momentos", "/oracoes", ft.Colors.BLUE_100, "oracao.png"),
                 _criar_card("Config.", "Ajustes do app", "/configuracoes", ft.Colors.GREY_200, None),
             ],
             runs_count=3,
@@ -313,6 +315,7 @@ def main(page: ft.Page):
 
     def _criar_card(titulo, subtitulo, rota, cor_fundo, caminho_imagem=None):
         if caminho_imagem:
+            # 🔥 AGORA busca a imagem na RAIZ (porque o caminho é só o nome)
             icon = ft.Image(
                 src=caminho_imagem,
                 width=80,
@@ -484,7 +487,6 @@ def main(page: ft.Page):
         page.add(ft.Container(content=coluna, padding=15, expand=True))
         page.update()
 
-    # ==================== MOSTRAR VERSÍCULOS (CORRIGIDO) ====================
     def mostrar_versiculos(livro, capitulo):
         tamanho = obter_tamanho_fonte()
         page.controls.clear()
@@ -497,7 +499,6 @@ def main(page: ft.Page):
             ref = f"{livro['nome']} {capitulo['numero']}:{v['numero']}"
             favorito = eh_favorito(ref)
             
-            # 🔥 CORREÇÃO 1: proteção contra client_storage
             try:
                 nota = page.client_storage.get(f"nota_{ref}") or ""
             except AttributeError:
@@ -514,7 +515,6 @@ def main(page: ft.Page):
                     width=350,
                 )
                 def salvar_anotacao(e):
-                    # 🔥 CORREÇÃO 2: proteção contra client_storage
                     try:
                         page.client_storage.set(f"nota_{r}", campo.value)
                     except AttributeError:
