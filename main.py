@@ -256,13 +256,14 @@ def main(page: ft.Page):
         grid_width = (card_size * 3) + (spacing * 2)
         grid_height = (card_size * 2) + spacing
 
+        # 🔥 MUDANÇA AQUI: caminhos apontam para /assets/images/
         grid = ft.GridView(
             controls=[
-                _criar_card("Bíblia", "Leia e estude", "/biblia", ft.Colors.INDIGO_100, "/assets/biblia.jpg"),
+                _criar_card("Bíblia", "Leia e estude", "/biblia", ft.Colors.INDIGO_100, "/assets/images/biblia.jpg"),
                 _criar_card("Favoritos", "Versículos salvos", "/favoritos", ft.Colors.AMBER_100, None),
-                _criar_card("Liturgia", "Liturgia Diária", "/liturgia", ft.Colors.GREEN_100, "/assets/pomba.png"),
-                _criar_card("Terço", "Reze o Santo Terço", "/terco", ft.Colors.PURPLE_100, "/assets/rosario.png"),
-                _criar_card("Orações", "Para todos os momentos", "/oracoes", ft.Colors.BLUE_100, "/assets/oracao.png"),
+                _criar_card("Liturgia", "Liturgia Diária", "/liturgia", ft.Colors.GREEN_100, "/assets/images/pomba.png"),
+                _criar_card("Terço", "Reze o Santo Terço", "/terco", ft.Colors.PURPLE_100, "/assets/images/rosario.png"),
+                _criar_card("Orações", "Para todos os momentos", "/oracoes", ft.Colors.BLUE_100, "/assets/images/oracao.png"),
                 _criar_card("Config.", "Ajustes do app", "/configuracoes", ft.Colors.GREY_200, None),
             ],
             runs_count=3,
@@ -528,7 +529,6 @@ def main(page: ft.Page):
                         ft.TextButton("Salvar", on_click=salvar_anotacao),
                     ],
                 )
-                # 🔥 Correção: usar page.open para abrir o diálogo
                 page.dialog = dialog
                 dialog.open = True
                 page.update()
