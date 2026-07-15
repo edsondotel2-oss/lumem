@@ -95,6 +95,7 @@ def carregar_oracoes():
 # ---------- App principal ----------
 def main(page: ft.Page):
     page.title = "Lumem"
+    page.assets_dir = "assets"   # 🔥 LINHA NOVA
     page.theme_mode = ft.ThemeMode.LIGHT
     page.window_width = 1000
     page.window_height = 700
