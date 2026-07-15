@@ -1,5 +1,5 @@
 import flet as ft
-from flet.asgi import FletApp
+from flet import FletApp
 from main import main
 
 app = FletApp(main)
