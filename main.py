@@ -256,14 +256,14 @@ def main(page: ft.Page):
         grid_width = (card_size * 3) + (spacing * 2)
         grid_height = (card_size * 2) + spacing
 
-        # 🔥 MUDANÇA AQUI: caminhos apontam para /assets/images/
+        # Cards com EMOJIS (último argumento None)
         grid = ft.GridView(
             controls=[
-                _criar_card("Bíblia", "Leia e estude", "/biblia", ft.Colors.INDIGO_100, "/assets/images/biblia.jpg"),
+                _criar_card("Bíblia", "Leia e estude", "/biblia", ft.Colors.INDIGO_100, None),
                 _criar_card("Favoritos", "Versículos salvos", "/favoritos", ft.Colors.AMBER_100, None),
-                _criar_card("Liturgia", "Liturgia Diária", "/liturgia", ft.Colors.GREEN_100, "/assets/images/pomba.png"),
-                _criar_card("Terço", "Reze o Santo Terço", "/terco", ft.Colors.PURPLE_100, "/assets/images/rosario.png"),
-                _criar_card("Orações", "Para todos os momentos", "/oracoes", ft.Colors.BLUE_100, "/assets/images/oracao.png"),
+                _criar_card("Liturgia", "Liturgia Diária", "/liturgia", ft.Colors.GREEN_100, None),
+                _criar_card("Terço", "Reze o Santo Terço", "/terco", ft.Colors.PURPLE_100, None),
+                _criar_card("Orações", "Para todos os momentos", "/oracoes", ft.Colors.BLUE_100, None),
                 _criar_card("Config.", "Ajustes do app", "/configuracoes", ft.Colors.GREY_200, None),
             ],
             runs_count=3,
@@ -313,32 +313,33 @@ def main(page: ft.Page):
         page.update()
 
     def _criar_card(titulo, subtitulo, rota, cor_fundo, caminho_imagem=None):
-    emojis = {
-        "Bíblia": "📖",
-        "Favoritos": "⭐",
-        "Liturgia": "📅",
-        "Terço": "🙏",
-        "Orações": "🕊️",
-        "Config.": "⚙️"
-    }
-    icon = ft.Text(emojis.get(titulo, "📖"), size=50)
-    
-    return ft.Container(
-        content=ft.Column([
-            icon,
-            ft.Text(titulo, size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.INDIGO_900),
-            ft.Text(subtitulo, size=12, color=ft.Colors.GREY_700, text_align=ft.TextAlign.CENTER),
-        ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, spacing=3),
-        padding=12,
-        border_radius=12,
-        bgcolor=ft.Colors.WHITE,
-        shadow=ft.BoxShadow(blur_radius=8, spread_radius=1, color=ft.Colors.BLACK12),
-        ink=True,
-        on_click=lambda e, r=rota: _navegar_para(r),
-        width=220,
-        height=220,
-        margin=0,
-    )
+        # Usa emojis em vez de imagens
+        emojis = {
+            "Bíblia": "📖",
+            "Favoritos": "⭐",
+            "Liturgia": "📅",
+            "Terço": "🙏",
+            "Orações": "🕊️",
+            "Config.": "⚙️"
+        }
+        icon = ft.Text(emojis.get(titulo, "📖"), size=50)
+        
+        return ft.Container(
+            content=ft.Column([
+                icon,
+                ft.Text(titulo, size=20, weight=ft.FontWeight.BOLD, color=ft.Colors.INDIGO_900),
+                ft.Text(subtitulo, size=12, color=ft.Colors.GREY_700, text_align=ft.TextAlign.CENTER),
+            ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, spacing=3),
+            padding=12,
+            border_radius=12,
+            bgcolor=ft.Colors.WHITE,
+            shadow=ft.BoxShadow(blur_radius=8, spread_radius=1, color=ft.Colors.BLACK12),
+            ink=True,
+            on_click=lambda e, r=rota: _navegar_para(r),
+            width=220,
+            height=220,
+            margin=0,
+        )
 
     def _navegar_para(rota):
         if rota == "/biblia":
@@ -893,17 +894,24 @@ def main(page: ft.Page):
             "Momentos Difíceis": "🙏"
         }
         
-       grid = ft.GridView(
-    controls=[
-        _criar_card("Bíblia", "Leia e estude", "/biblia", ft.Colors.INDIGO_100, None),
-        _criar_card("Favoritos", "Versículos salvos", "/favoritos", ft.Colors.AMBER_100, None),
-        _criar_card("Liturgia", "Liturgia Diária", "/liturgia", ft.Colors.GREEN_100, None),
-        _criar_card("Terço", "Reze o Santo Terço", "/terco", ft.Colors.PURPLE_100, None),
-        _criar_card("Orações", "Para todos os momentos", "/oracoes", ft.Colors.BLUE_100, None),
-        _criar_card("Config.", "Ajustes do app", "/configuracoes", ft.Colors.GREY_200, None),
-                ],
-        ...
-        )
+        grid_categorias = ft.GridView(
+            controls=[
+                ft.Container(
+                    content=ft.Column([
+                        ft.Text(icones_categorias.get(categoria, "📖"), size=24, text_align=ft.TextAlign.CENTER),
+                        ft.Text(categoria, size=8, weight=ft.FontWeight.W_500, color=ft.Colors.INDIGO_800, text_align=ft.TextAlign.CENTER),
+                        ft.Text(f"{len(oracoes_dados[categoria])}", size=6, color=ft.Colors.GREY_500, text_align=ft.TextAlign.CENTER),
+                    ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, spacing=0, expand=True),
+                    padding=4,
+                    bgcolor=ft.Colors.AMBER_50,
+                    border_radius=6,
+                    ink=True,
+                    on_click=lambda e, cat=categoria: mostrar_oracoes_categoria(cat),
+                    width=55,
+                    height=55,
+                    alignment=ft.Alignment(0, 0),
+                ) for categoria in oracoes_dados
+            ],
             runs_count=5,
             spacing=6,
             run_spacing=6,
